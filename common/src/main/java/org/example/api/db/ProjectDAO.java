@@ -1,4 +1,4 @@
-package org.example.db;
+package org.example.api.db;
 
 import org.example.model.Project;
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;

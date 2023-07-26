@@ -2,9 +2,8 @@ package org.example.api.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.example.api.model.Token;
-import org.example.api.model.User;
-import org.example.util.PropertiesLoader;
+import org.example.model.Token;
+import org.example.model.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -14,9 +13,9 @@ import retrofit2.internal.EverythingIsNonNull;
 
 import java.io.IOException;
 
-public class NetService implements Callback<Token> {
+public class AuthService implements Callback<Token> {
 
-    public static final String BASE_URL = new PropertiesLoader().getBaseURL();
+    public static final String BASE_URL = PropertiesService.getBaseURL();
     private static final Logger logger = LogManager.getLogger();
 
     public void getToken(User user) throws IOException {

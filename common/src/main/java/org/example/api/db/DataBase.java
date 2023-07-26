@@ -1,17 +1,18 @@
-package org.example.util;
+package org.example.api.db;
 
+import org.example.api.service.PropertiesService;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 
 public class DataBase {
 
-    public static Jdbi jdbi;
+    public static final Jdbi jdbi;
 
     static {
         jdbi = Jdbi.create(
-                PropertiesLoader.getDBurl(),
-                PropertiesLoader.getPGUsername(),
-                PropertiesLoader.getPGPassword());
+                PropertiesService.getDBurl(),
+                PropertiesService.getPGUsername(),
+                PropertiesService.getPGPassword());
 
         jdbi.installPlugin(new SqlObjectPlugin());
     }

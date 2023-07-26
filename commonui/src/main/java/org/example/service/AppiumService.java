@@ -4,10 +4,13 @@ import org.example.api.service.PropertiesService;
 import org.example.util.PropertiesFileReader;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-public class CapabilitiesService extends PropertiesFileReader {
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class AppiumService extends PropertiesFileReader {
 
     static {
-        load(PropertiesService.class.getClassLoader().getResourceAsStream("capabilities.properties"));
+        load(PropertiesService.class.getClassLoader().getResourceAsStream("appium.properties"));
     }
 
     public static DesiredCapabilities getCapabilities() {
@@ -21,5 +24,9 @@ public class CapabilitiesService extends PropertiesFileReader {
         capabilities.setCapability("appActivity", properties.getProperty("appActivity"));
 
         return capabilities;
+    }
+
+    public static URL getAppiumUrl() throws MalformedURLException {
+        return new URL(properties.getProperty("appiumServerUrl"));
     }
 }

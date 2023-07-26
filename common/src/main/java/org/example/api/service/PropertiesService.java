@@ -1,9 +1,11 @@
-package org.example.util;
+package org.example.api.service;
 
-public class ProjectProperties extends PropertiesFileReader {
+import org.example.util.PropertiesFileReader;
+
+public class PropertiesService extends PropertiesFileReader {
 
     static {
-        load(ProjectProperties.class.getClassLoader().getResourceAsStream("project.properties"));
+        load(PropertiesService.class.getClassLoader().getResourceAsStream("project.properties"));
     }
 
     public static String getBaseURL() {

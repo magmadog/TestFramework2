@@ -1,57 +1,24 @@
-package org.example.db;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.example.api.db.ProjectDAO;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import org.example.util.PropertiesLoader;
+import static org.example.api.db.DataBase.jdbi;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+class TestDataBaseConnection {
 
-public class TestDataBaseConnection {
+    private static final Logger logger = LogManager.getLogger();
 
-    /*
-    Проверка подключения к PostgreSQL серверу и выполнение запроса к таблице
-    DB: test_db
-    Table-projects: project_id(int), name(char*), start_date(date)
-    */
+    @Test
+    void testConnectionToDB() {
 
-    private final String url = PropertiesLoader.getDBurl();
-    private final String user = "postgres";
-    private final String password = "";
-    private final String sql = "SELECT name FROM projects WHERE project_id = 1";
-    private final String expectedProjectName = "Home Credit";
+        var expectedProjectName = "Home Credit";
 
-//    @Test
-//    public void testJDBCConnection() {
-//
-//        String projectName = "";
-//
-//        try (Connection connection = DriverManager.getConnection(url, user, password)) {
-//            PreparedStatement statement = connection.prepareStatement(sql);
-//            ResultSet result = statement.executeQuery();
-//            if (result.next()) {
-//                projectName = result.getString("name");
-//            }
-//        } catch (SQLException e) {
-//            System.out.println("Connection failure.");
-//            e.printStackTrace();
-//        }
-//        Assertions.assertEquals(expectedProjectName, projectName);
-//    }
-//
-//    @Test
-//    public void testJDBIConnection(){
-//        Jdbi jdbi = Jdbi.create(url, user, password);
-//
-//        String projectName = "";
-//        try (Handle handle = jdbi.open()) {
-//            Query query = handle.createQuery(sql);
-//            projectName = query.mapTo(String.class).first();
-//        }catch (Exception e) {
-//            System.out.println("Connection failure.");
-//            e.printStackTrace();
-//        }
-//        Assertions.assertEquals(expectedProjectName, projectName);
-//    }
+        var projects = jdbi.withExtension(ProjectDAO.class, ProjectDAO::getAllProjects);
+        logger.info("Data retrieved from table: {}", projects.toString());
+
+        var project = jdbi.withExtension(ProjectDAO.class, dao -> dao.getProjectByID(1));
+        Assertions.assertEquals(expectedProjectName, project.getName());
+    }
 }

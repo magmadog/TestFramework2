@@ -1,29 +1,17 @@
 package org.example.api.service;
 
-import org.example.api.model.User;
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.Constructor;
+import org.example.model.User;
+import org.example.util.YAMLFileReader;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
-public class UserService {
+public class UserService extends YAMLFileReader {
     private static final ArrayList<User> users = new ArrayList<>();
 
     static {
-        Yaml yaml = new Yaml();
-        InputStream inputStream;
-        try {
-            inputStream = new FileInputStream("users.yml");
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        ArrayList<Map<String, String>> data = yaml.load(inputStream);
-        for (Map<String, String> user : data){
+        load(UserService.class.getClassLoader().getResourceAsStream("users.yml"));
+        for (Map<String, String> user : data) {
             users.add(new User(user.get("login"), user.get("password")));
         }
     }

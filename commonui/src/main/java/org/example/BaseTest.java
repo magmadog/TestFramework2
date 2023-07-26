@@ -1,4 +1,4 @@
-package org.example.config;
+package org.example;
 
 import com.codeborne.selenide.WebDriverRunner;
 import io.appium.java_client.AppiumDriver;
@@ -9,9 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 
 import java.net.MalformedURLException;
 
-public class CapabilitiesConfig {
+public class BaseTest {
 
-    public AppiumDriver driver;
+    private AppiumDriver driver;
 
     @BeforeEach
     public final void setUp() throws MalformedURLException {

@@ -1,13 +1,12 @@
 import org.example.BaseTest;
-
 import org.example.lib.MainPageObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class ExampleTest extends BaseTest {
+class HelloWorldTest extends BaseTest {
 
     @Test
-    void testSearchHelloWorld(){
+    void testSearchHelloWorldOnScreen() {
         var mpo = new MainPageObject();
 
         Assertions.assertEquals(

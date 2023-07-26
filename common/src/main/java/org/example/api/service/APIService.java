@@ -1,6 +1,6 @@
 package org.example.api.service;
 
-import org.example.api.model.Token;
+import org.example.model.Token;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

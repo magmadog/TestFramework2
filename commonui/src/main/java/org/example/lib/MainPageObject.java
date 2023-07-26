@@ -1,25 +1,14 @@
-package com.example.commonui.lib;
+package org.example.lib;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
-import io.appium.java_client.AppiumDriver;
+import static com.codeborne.selenide.Selenide.$;
 
 public class MainPageObject {
 
-    private WebDriver driver;
-    public MainPageObject(AppiumDriver driver) {
-        this.driver = driver;
-    }
+    private final By helloWorldTextSelector = By.xpath("//*[contains(@text, 'Hello World!')]");
 
-    public WebElement waitForElement(By locator, String errorMessage, Long timeout) {
-        WebDriverWait waiter = new WebDriverWait(driver, Duration.ofSeconds(timeout));
-        waiter.withMessage(errorMessage);
-        return waiter.until(ExpectedConditions.presenceOfElementLocated(locator));
+    public String getHelloWorldText() {
+        return $(helloWorldTextSelector).getText();
     }
 }

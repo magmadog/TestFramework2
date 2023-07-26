@@ -1,15 +1,15 @@
-import org.example.api.model.User;
-import org.example.api.service.NetService;
+import org.example.api.service.AuthService;
 import org.example.api.service.UserService;
+import org.example.model.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-public class TestGetAuthToken {
+class TestGetAuthToken {
 
     @Test
-    public void testGetToken() throws IOException {
+    void testGetToken() throws IOException {
         String username = "testuser1";
         User user = UserService.getUserByLogin(username);
         Assertions.assertNotEquals(
@@ -18,7 +18,7 @@ public class TestGetAuthToken {
                 "Can't get user data from yaml file"
         );
 
-        NetService apiService = new NetService();
+        AuthService apiService = new AuthService();
         apiService.getToken(user);
 
         Assertions.assertNotEquals(

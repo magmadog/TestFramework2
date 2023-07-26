@@ -1,4 +1,4 @@
-package org.example.api.model;
+package org.example.model;
 
 public class User {
     private String login;
