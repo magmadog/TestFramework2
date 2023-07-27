@@ -1,26 +1,12 @@
 package org.example.model;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Data;
 
+@Data
 public class Token {
     @SerializedName("status")
-    public String status;
+    private String status;
     @SerializedName("generatedToken")
-    public String generatedToken;
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getToken() {
-        return generatedToken;
-    }
-
-    public void setToken(String token) {
-        this.generatedToken = token;
-    }
+    private String generatedToken;
 }

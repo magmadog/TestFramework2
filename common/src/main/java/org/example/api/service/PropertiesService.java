@@ -1,26 +1,32 @@
 package org.example.api.service;
 
-import org.example.util.PropertiesFileReader;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import org.aeonbits.owner.ConfigFactory;
+import org.example.util.ProjectConfig;
 
-public class PropertiesService extends PropertiesFileReader {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class PropertiesService {
+
+    private static final ProjectConfig config;
 
     static {
-        load(PropertiesService.class.getClassLoader().getResourceAsStream("project.properties"));
+        config = ConfigFactory.create(ProjectConfig.class);
     }
 
     public static String getBaseURL() {
-        return properties.getProperty("base_url");
+        return config.baseUrl();
     }
 
     public static String getDBurl() {
-        return properties.getProperty("db_url");
+        return config.dbUrl();
     }
 
-    public static String getPGUsername(){
-        return properties.getProperty("pg_username");
+    public static String getPGUsername() {
+        return config.pgUsername();
     }
 
-    public static String getPGPassword(){
-        return properties.getProperty("pg_password");
+    public static String getPGPassword() {
+        return config.pgPassword();
     }
 }

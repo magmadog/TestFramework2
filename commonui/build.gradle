@@ -18,6 +18,11 @@ dependencies {
     implementation 'org.apache.logging.log4j:log4j-api:2.16.0'
     //selenide
     implementation 'com.codeborne:selenide-appium:6.15.0'
+    //JSON
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    //Properties reader
+    implementation 'org.aeonbits.owner:owner:1.0.12'
 
     implementation project(":common")
 

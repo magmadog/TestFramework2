@@ -1,7 +1,6 @@
 package org.example.api.service;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.example.model.Token;
 import org.example.model.User;
 import retrofit2.Call;
@@ -13,10 +12,10 @@ import retrofit2.internal.EverythingIsNonNull;
 
 import java.io.IOException;
 
+@Log4j2
 public class AuthService implements Callback<Token> {
 
     public static final String BASE_URL = PropertiesService.getBaseURL();
-    private static final Logger logger = LogManager.getLogger();
 
     public void getToken(User user) throws IOException {
         var retrofit = new Retrofit.Builder()
@@ -29,7 +28,7 @@ public class AuthService implements Callback<Token> {
         var response = apiService.getAuthTokenByLoginAndPassword(user.getLogin(), user.getPassword()).execute();
         assert response.body() != null;
 
-        user.setAuthToken(response.body().getToken());
+        user.setAuthToken(response.body());
     }
 
     @Override
@@ -37,9 +36,9 @@ public class AuthService implements Callback<Token> {
     public void onResponse(Call<Token> call, Response<Token> response) {
         if (response.isSuccessful()) {
             var token = response.body();
-            logger.info("Recived data: {}", token);
+            log.info("Recived data: {}", token);
         } else {
-            logger.error("Recived error data: {}", response.errorBody());
+            log.error("Recived error data: {}", response.errorBody());
         }
     }
 

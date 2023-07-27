@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class UserService extends YAMLFileReader {
+
+    private static final String USER_FILE = "users.yml";
     private static final ArrayList<User> users = new ArrayList<>();
 
     static {
-        load(UserService.class.getClassLoader().getResourceAsStream("users.yml"));
+        load(UserService.class.getClassLoader().getResourceAsStream(USER_FILE));
         for (Map<String, String> user : data) {
             users.add(new User(user.get("login"), user.get("password")));
         }
